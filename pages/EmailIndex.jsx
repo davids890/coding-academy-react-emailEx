@@ -4,13 +4,17 @@ import { Outlet } from "react-router-dom";
 
 import { EmailList } from "../cmps/EmailList"
 import { emailService } from "../src/services/email-service.js"
-
-
+import { EmailFilter } from "../cmps/EmailFilter.jsx";
+import { EmailFolderList } from "../cmps/EmailFolderList.jsx";
 
 export function EmailIndex() {
     const [ emailList, setEmails ] = useState([])
     const [ filterBy, setFilterBy ] = useState(emailService.getDefaultFilter())
-    
+    // const [ filterBy, setFilterBy ] = useState(emailService.getDefaultFilter())
+    // useEffect(() => {
+    //     loadEmails()
+    // }, [filterBy])
+
     useEffect(() => {
         loadEmails()
     }, [filterBy])
@@ -24,9 +28,14 @@ export function EmailIndex() {
         }
     }
 
+    function onFilterBy(filterBy) {
+        setFilterBy(filterBy)
+    }
+
     return <section className="email-index">
+        <EmailFolderList />
+        <EmailFilter filterBy={filterBy}  onFilterBy={onFilterBy}/>
         <EmailList emailList={emailList}/>
-        <h1>Email Index page</h1>
 
         <Outlet /> 
     </section>

@@ -4,7 +4,6 @@ import { Link } from "react-router-dom";
 
 
 export function EmailList({emailList}) {
-    console.log('emailList.map: ', emailList);
     return <ul>
         {emailList.map(email => (
             <li key={email.id}>

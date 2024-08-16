@@ -30,3 +30,29 @@
 .app-header section.container>section {
     flex-grow: 1;
 }
+
+.email-folder-list {
+    background-color: rgba(162, 185, 185, 0.276);
+    float: left;
+    width: 20%;
+    padding-right: 2%;
+    padding-left: 2%;
+    height: 100vh;
+}
+.email-folder-list .list {
+    float: center;
+    padding: 0; /* Remove default padding */
+    margin: 0; /* Remove default margin */
+    list-style-type: none;
+    margin-top: 30%;
+}
+
+.email-folder-list .list li {
+    cursor: pointer; /* Add pointer cursor for clickable items */
+    padding: 20%; /*Add padding for better spacing */
+}
+
+.email-folder-list .list li:hover {
+    background-color: rgba(0, 0, 0, 0.1); /* Optional: Highlight on hover */
+}
+/* email - correct place ? */

@@ -34,20 +34,25 @@ function _createEmails() {
 }
 
 async function query(filterBy) {
+    console.log('query filterBy: ', filterBy);
     let emails = await storageService.query(STORAGE_KEY)
-    // if (filterBy) {
-    //     var { type, maxBatteryStatus, minBatteryStatus, model } = filterBy
-    //     maxBatteryStatus = maxBatteryStatus || Infinity
-    //     minBatteryStatus = minBatteryStatus || 0
-    //     robots = robots.filter(robot => robot.type.toLowerCase().includes(type.toLowerCase()) && robot.model.toLowerCase().includes(model.toLowerCase())
-    //         && (robot.batteryStatus < maxBatteryStatus)
-    //         && robot.batteryStatus > minBatteryStatus)
-    // }
+    if (filterBy) {
+        emails = emails.filter(email => {
+            console.log(' email.body: ',  email.body);
+            console.log(' filterBy.txt: ',  filterBy.txt);
+            console.log('email.body.includes(filterBy.txt): ',  email.body.includes(filterBy.txt));
+            return filterBy.txt.length === 0 || 
+                    email.body.toLowerCase().includes(filterBy.txt.toLowerCase()) ||
+                        email.subject.toLowerCase().includes(filterBy.txt.toLowerCase()) ||
+                            email.from.toLowerCase().includes(filterBy.txt.toLowerCase())
+        })
+    }
+
     return emails
 }
 
 function getDefaultFilter() {
-    return null
+    return {'status': ' ', 'txt': '', 'isRead': null}
 }
 
 function createDummyEmails() {
