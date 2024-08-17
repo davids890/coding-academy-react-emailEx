@@ -3,6 +3,9 @@ import { useState, useEffect } from "react"
 
 export function EmailFilter({ filterBy, onFilterBy }) {
     const [ filterByToEdit, setFilterByToEdit ] = useState(filterBy)
+    console.log('Received filterBy:', filterBy);
+    console.log('Received onFilterBy:', onFilterBy);
+
 
     useEffect(() => {
         onFilterBy(filterByToEdit)
@@ -13,9 +16,9 @@ export function EmailFilter({ filterBy, onFilterBy }) {
         setFilterByToEdit(prev => ({...prev, ['txt']: userTxtInput})) // why [] ?
     }
 
-    return <section className="email-filter">
-        <h1>Filter</h1>
-        <label htmlFor="search">Search </label>
+    return <section className="filter-container">
+        {/* <h1>Filter</h1> */}
+        <label htmlFor="search"></label>
         <input 
             //set params
             type="text" 
@@ -26,6 +29,8 @@ export function EmailFilter({ filterBy, onFilterBy }) {
             
             // catch user input
             onChange={handleChange}
+
+            placeholder="Search..."
         />
 
     </section>

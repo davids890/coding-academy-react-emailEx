@@ -4,9 +4,9 @@ import { Link } from "react-router-dom";
 
 
 export function EmailList({emailList}) {
-    return <ul>
+    return <ul className="email-preview-list">
         {emailList.map(email => (
-            <li key={email.id}>
+            <li key={email.id} className="li">
                 <Link to={`/email_index/${email.id}`}>
                     <EmailPreview emailItem={email} />
                 </Link>

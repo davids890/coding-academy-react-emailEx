@@ -31,6 +31,44 @@
     flex-grow: 1;
 }
 
+.email-preview-list {
+    list-style-type: none; /* Removes default list bullets */
+    margin-left: 20%; /* Adjust margin as needed */
+    padding: 0; /* Ensure no padding affecting alignment */
+}
+
+.email-preview-list li {
+    text-align: left; /* Ensures text is aligned to the left */
+    padding-top: 20px;
+    padding-bottom: 20px;
+    border-bottom: 1.1px solid rgba(128, 128, 128, 0.329);
+    text-align: center;
+}
+.email-preview-list li:hover {
+    background-color: rgba(0, 0, 0, 0.1); /* Optional: Highlight on hover */
+}
+
+.filter-container {
+    display: flex;
+    flex-direction: column; /* Stack label and input vertically */
+    width: 70%; /* Ensure it takes full width */
+    padding-top: 3%;
+    padding-left: 9%;
+    padding-right: 3%;
+
+}
+.filter-container input {
+    padding: 9px;
+    border: 1.5px solid rgba(0, 0, 0, 0.216); /* Sets the border width and color */
+    border-radius: 12px; /* Rounds the corners of the border */
+    border-style: solid; /* Defines the border style */
+    outline: none; /* Removes default focus outline */
+    width: 100%; /* Adjust width as needed */
+    max-width: 400px; /* Optional: limit max width */
+}
+
+
+
 .email-folder-list {
     background-color: rgba(162, 185, 185, 0.276);
     float: left;
@@ -55,4 +93,11 @@
 .email-folder-list .list li:hover {
     background-color: rgba(0, 0, 0, 0.1); /* Optional: Highlight on hover */
 }
+
+.email-details {
+    text-align: center;
+}
+
+
+
 /* email - correct place ? */

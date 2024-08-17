@@ -1,11 +1,8 @@
 
 
-export function EmailPreview({emailItem, OnDetails}) {
+export function EmailPreview({emailItem}) {
 
+    return<div className="email-preview">{emailItem.from.split('@')[0]}{emailItem.subject}{emailItem.body}</div>
+}
 
-    return <div>
-        <p onClick={OnDetails}>{emailItem.from.split('@')[0]}        <span style={{ fontWeight: 'bold' }}>{emailItem.subject}</span>          {emailItem.body}</p>
-    </div>
-    }
-
-//TODO: change to a table
+//TODO: change to a table ?

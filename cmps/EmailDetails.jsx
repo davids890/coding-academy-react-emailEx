@@ -2,6 +2,7 @@ import { useEffect, useState } from "react"
 import { useParams } from "react-router"
 import { emailService } from "../src/services/email-service"
 import { Link } from "react-router-dom"
+import { EmailFolderList } from "../cmps/EmailFolderList.jsx";
 
 
 export function EmailDetails() {
@@ -20,15 +21,18 @@ export function EmailDetails() {
 
     if (!email) return <div>Loading...</div>
 
-    return <section className="email-details">
-        <h1>Email details</h1><br />
-        <h2>From: {email.from}</h2><br />
-        <h2>Subject: {email.subject}</h2><br />
-        <h2>Description:</h2>
-        <div>{email.body}</div><br />
-        <Link to="/email_index/" >
-            <button>Back</button>
-        </Link>
+    return <section>
+        <EmailFolderList />
+        <section  className="email-details">
+            <h1>Email details</h1><br />
+            <h2>From: {email.from}</h2><br />
+            <h2>Subject: {email.subject}</h2><br />
+            <h2>Description:</h2>
+            <div>{email.body}</div><br />
+            <Link to="/email_index/" >
+                <button>Back</button>
+            </Link>
+        </section>
     </section>
 
 

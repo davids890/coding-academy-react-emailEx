@@ -19,3 +19,9 @@ export function App() {
         </main>
     </Router>
 }
+
+// TODO: 
+// delete
+// starr 
+// read or undread
+// limit number of words in the preview

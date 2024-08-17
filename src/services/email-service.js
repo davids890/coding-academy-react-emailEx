@@ -10,6 +10,10 @@ export const emailService = {
 }
 
 const STORAGE_KEY = 'emails'
+const loggedinUser = {
+    email: 'user@appsus.com',
+    fullname: 'Mahatma Appsus'
+    }
 
 _createEmails()
 
@@ -34,25 +38,55 @@ function _createEmails() {
 }
 
 async function query(filterBy) {
-    console.log('query filterBy: ', filterBy);
     let emails = await storageService.query(STORAGE_KEY)
-    if (filterBy) {
+
+    
+    // inbox search
+    if (filterBy.status === 'Inbox') {
         emails = emails.filter(email => {
-            console.log(' email.body: ',  email.body);
-            console.log(' filterBy.txt: ',  filterBy.txt);
-            console.log('email.body.includes(filterBy.txt): ',  email.body.includes(filterBy.txt));
+            return email.to === 'user@appsus.com'
+        })
+    }
+    
+    // sent search
+    if (filterBy.status === 'Sent') {
+        emails = emails.filter(email => {
+            return email.to !== 'user@appsus.com'
+        })
+    }
+    // star search
+    if (filterBy.status === 'Star') {
+        emails = emails.filter(email => {
+            return email.isStarred
+        })
+    }
+    
+    // trash search
+    if (filterBy.status === 'Trash') {
+        emails = emails.filter(email => {
+            return email.removedAt
+        })
+    }
+    
+    console.log('emails.length: ', emails.length);
+    // text search
+    if (filterBy.txt.length > 0) {
+        emails = emails.filter(email => {
             return filterBy.txt.length === 0 || 
                     email.body.toLowerCase().includes(filterBy.txt.toLowerCase()) ||
                         email.subject.toLowerCase().includes(filterBy.txt.toLowerCase()) ||
                             email.from.toLowerCase().includes(filterBy.txt.toLowerCase())
-        })
-    }
+            })
+        }
+    
+    console.log('emails.length: ', emails.length);
+    
 
     return emails
 }
 
 function getDefaultFilter() {
-    return {'status': ' ', 'txt': '', 'isRead': null}
+    return {'status': 'Inbox', 'txt': '', 'isRead': null}
 }
 
 function createDummyEmails() {
@@ -63,21 +97,66 @@ function createDummyEmails() {
             isRead: false,
             isStarred: false,
             sentAt : 1551133930594,
-            removedAt : null, //for later use
+            removedAt : false, //for later use
             from: 'momo@momo.com',
             to: 'user@appsus.com'
-        },
-        {
+            },
+            {
             id: 'e102',
             subject: 'Miss you2!',
             body: 'Would love to catch up sometimes2',
             isRead: false,
+            isStarred: true,
+            sentAt : 1551133930594_2,
+            removedAt : true, //for later use
+            from: 'momo@momo.com',
+            to: 'user@appsus.com'
+            },
+            {
+            id: 'e103',
+            subject: 'Miss you3!',
+            body: 'Would love to catch up sometimes3',
+            isRead: false,
+            isStarred: true,
+            sentAt : 1551133930594_2,
+            removedAt : false, //for later use
+            from: 'user@appsus.com',
+            to: 'someone@someone.com'
+            },
+            {
+            id: 'e104',
+            subject: 'Miss you4!',
+            body: 'Would love to catch up sometimes4',
+            isRead: false,
             isStarred: false,
             sentAt : 1551133930594_2,
-            removedAt : null, //for later use
-            from: 'momo@momo_2.com',
-            to: 'user@appsus_2.com'
+            removedAt : false, //for later use
+            from: 'user@appsus.com',
+            to: 'someone@someone.com'
             },
+            {
+            id: 'e105',
+            subject: 'Miss you5!',
+            body: 'Would love to catch up sometimes5',
+            isRead: false,
+            isStarred: false,
+            sentAt : 1551133930594_2,
+            removedAt : false, //for later use
+            from: 'user@appsus.com',
+            to: 'someone@someone.com'
+            },
+            {
+            id: 'e106',
+            subject: 'Miss you6!',
+            body: 'Would love to catch up sometimes6',
+            isRead: false,
+            isStarred: false,
+            sentAt : 1551133930594_2,
+            removedAt : false, //for later use
+            from: 'user@appsus.com',
+            to: 'someone@someone.com'
+            },
+
     ]
 }
 

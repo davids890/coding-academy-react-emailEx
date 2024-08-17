@@ -10,10 +10,6 @@ import { EmailFolderList } from "../cmps/EmailFolderList.jsx";
 export function EmailIndex() {
     const [ emailList, setEmails ] = useState([])
     const [ filterBy, setFilterBy ] = useState(emailService.getDefaultFilter())
-    // const [ filterBy, setFilterBy ] = useState(emailService.getDefaultFilter())
-    // useEffect(() => {
-    //     loadEmails()
-    // }, [filterBy])
 
     useEffect(() => {
         loadEmails()
@@ -33,14 +29,10 @@ export function EmailIndex() {
     }
 
     return <section className="email-index">
-        <EmailFolderList />
+        <EmailFolderList filterBy={filterBy}  onFilterBy={onFilterBy}/>
         <EmailFilter filterBy={filterBy}  onFilterBy={onFilterBy}/>
         <EmailList emailList={emailList}/>
 
         <Outlet /> 
     </section>
 }
-
-//TODO: implement: <EmailFilter>, <EmailFolderList>
-//TODO: aside bar EmailFolderList
-//TODO: limit number of words in the preview
