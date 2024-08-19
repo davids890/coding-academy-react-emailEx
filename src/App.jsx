@@ -13,15 +13,22 @@ export function App() {
             <Routes>
                 <Route path="/" element={<Home />} />
                 <Route path="/about" element={<About />} />
-                <Route path="/email_index" element={<EmailIndex />} />
-                    <Route path="/email_index/:id" element={<EmailDetails />} />
+                <Route path="/email" element={<EmailIndex />}>
+                    <Route path="/email/:id" element={<EmailDetails />} />
+                </Route>
             </Routes>
         </main>
     </Router>
 }
 
+// Q
+// 1. github pages
+// 2. compose
+// 3. how to add buttons to the list
+
+
 // TODO: 
-// delete
+// undelete from trash
 // starr 
 // read or undread
 // limit number of words in the preview

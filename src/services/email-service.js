@@ -25,9 +25,16 @@ function remove(id) {
     return storageService.remove(STORAGE_KEY, id)
 }
 function save(emailToSave) {
-    // ? post vs get - overwrite vs update
-    return storageService.post(STORAGE_KEY, emailToSave)
+    if (emailToSave.id) {
+        // Update existing email (overwrite it)
+        return storageService.put(STORAGE_KEY, emailToSave);
+    } else {
+        // Create a new email if no id exists
+        emailToSave.id = utilService.makeId();  // Ensure a new id is created
+        return storageService.post(STORAGE_KEY, emailToSave);
+    }
 }
+
 
 function _createEmails() {
     let emails = utilService.loadFromStorage(STORAGE_KEY)
@@ -39,25 +46,25 @@ function _createEmails() {
 
 async function query(filterBy) {
     let emails = await storageService.query(STORAGE_KEY)
-
     
     // inbox search
     if (filterBy.status === 'Inbox') {
         emails = emails.filter(email => {
-            return email.to === 'user@appsus.com'
+            return email.to === 'user@appsus.com' && !email.removedAt;
         })
     }
     
     // sent search
     if (filterBy.status === 'Sent') {
         emails = emails.filter(email => {
-            return email.to !== 'user@appsus.com'
+            return email.to !== 'user@appsus.com' && !email.removedAt;
         })
     }
     // star search
-    if (filterBy.status === 'Star') {
+    if (filterBy.status === 'Starred') {
         emails = emails.filter(email => {
-            return email.isStarred
+
+            return email.isStarred && !email.removedAt;
         })
     }
     
@@ -68,7 +75,6 @@ async function query(filterBy) {
         })
     }
     
-    console.log('emails.length: ', emails.length);
     // text search
     if (filterBy.txt.length > 0) {
         emails = emails.filter(email => {
@@ -78,8 +84,8 @@ async function query(filterBy) {
                             email.from.toLowerCase().includes(filterBy.txt.toLowerCase())
             })
         }
-    
-    console.log('emails.length: ', emails.length);
+
+    // 
     
 
     return emails
@@ -97,7 +103,7 @@ function createDummyEmails() {
             isRead: false,
             isStarred: false,
             sentAt : 1551133930594,
-            removedAt : false, //for later use
+            removedAt : null, //for later use
             from: 'momo@momo.com',
             to: 'user@appsus.com'
             },
@@ -108,7 +114,7 @@ function createDummyEmails() {
             isRead: false,
             isStarred: true,
             sentAt : 1551133930594_2,
-            removedAt : true, //for later use
+            removedAt : null, //for later use
             from: 'momo@momo.com',
             to: 'user@appsus.com'
             },
@@ -119,7 +125,7 @@ function createDummyEmails() {
             isRead: false,
             isStarred: true,
             sentAt : 1551133930594_2,
-            removedAt : false, //for later use
+            removedAt : null, //for later use
             from: 'user@appsus.com',
             to: 'someone@someone.com'
             },
@@ -130,7 +136,7 @@ function createDummyEmails() {
             isRead: false,
             isStarred: false,
             sentAt : 1551133930594_2,
-            removedAt : false, //for later use
+            removedAt : null, //for later use
             from: 'user@appsus.com',
             to: 'someone@someone.com'
             },
@@ -141,7 +147,7 @@ function createDummyEmails() {
             isRead: false,
             isStarred: false,
             sentAt : 1551133930594_2,
-            removedAt : false, //for later use
+            removedAt : null, //for later use
             from: 'user@appsus.com',
             to: 'someone@someone.com'
             },
@@ -152,7 +158,7 @@ function createDummyEmails() {
             isRead: false,
             isStarred: false,
             sentAt : 1551133930594_2,
-            removedAt : false, //for later use
+            removedAt : null, //for later use
             from: 'user@appsus.com',
             to: 'someone@someone.com'
             },
