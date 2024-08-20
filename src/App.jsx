@@ -29,6 +29,6 @@ export function App() {
 
 // TODO: 
 // undelete from trash
-// starr 
-// read or undread
 // limit number of words in the preview
+// search - find all the. emails - not only fron the. current status
+// search - find read/unread/all - text search

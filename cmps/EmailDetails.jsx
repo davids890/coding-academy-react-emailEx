@@ -14,11 +14,9 @@ export function EmailDetails() {
 
     async function loadEmailAndMark() {
         const email = await emailService.getById(id)
-        // console.log(email);
         const emailRead = { ...email, isRead: true }
         emailService.save(emailRead)
         setEmail(emailRead)
-        // console.log(email);
     }
 
     if (!email) return <div>Loading...</div>
@@ -32,6 +30,7 @@ export function EmailDetails() {
             <div>{email.body}</div><br />
             <Link to="/email/" >
                 <button>Back</button>
+                {/* why here only when i press back the link is activated ? in. EmailList is different - <EmailPreview emailItem={email} /> */}
             </Link>
         </section>
     </section>

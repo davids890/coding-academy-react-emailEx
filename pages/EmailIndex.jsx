@@ -50,12 +50,28 @@ export function EmailIndex() {
             }
         }
     }
+
+    async function onMarkUnread(emailId) {
+        const email = await emailService.getById(emailId)
+        const emailCopy = {...email, isRead: false}
+        await emailService.save(emailCopy)
+        await loadEmails()
+    }
+
+    async function onStarMark(emailId) {
+        const email = await emailService.getById(emailId)
+        console.log('email: ', email);
+        const emailCopy = {...email, isStarred: !email.isStarred}
+        await emailService.save(emailCopy)
+        await loadEmails()
+    }
     
 
     return <section className="email-index">
         <EmailFolderList filterBy={filterBy}  onFilterBy={onFilterBy}/>
         <EmailFilter filterBy={filterBy}  onFilterBy={onFilterBy}/>
-        {!id && <EmailList emailList={emailList} onEmailDelete={onEmailDelete} />}
+        {!id && <EmailList emailList={emailList} onEmailDelete={onEmailDelete} 
+            onMarkUnread={onMarkUnread} status={filterBy.status} onStarMark={onStarMark} />}
 
         <Outlet /> 
     </section>
