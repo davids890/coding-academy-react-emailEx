@@ -5,16 +5,6 @@ import { useState } from "react";
 
 export function EmailList({emailList, onEmailDelete, onMarkUnread, status, onStarMark}) {
 
-    function onDeleteEmail(id) {
-        // Notify parent about the change in filter
-        onEmailDelete({id});
-    }
-    function onUnreadMark(id) {
-        onMarkUnread(id)
-    }
-    function onStarMarkCallback(id) {
-        onStarMark(id)
-    }
     function starButton(email) {
         return email.isStarred ?  "Unstar email" : "Star email"
     }
@@ -26,9 +16,9 @@ export function EmailList({emailList, onEmailDelete, onMarkUnread, status, onSta
             else {className = email.isRead === true ? "email-item clicked" : "email-item";}
             return (
                 <li key={email.id} className={className}>
-                    <button onClick={() => onDeleteEmail(email.id)}>delete</button>
-                    <button onClick={() => onUnreadMark(email.id)}>Mark as unread</button>
-                    <button onClick={() => onStarMarkCallback(email.id)}>{starButton(email)}</button>
+                    <button onClick={() => onEmailDelete(email.id)}>delete</button>
+                    <button onClick={() => onMarkUnread(email.id)}>Mark as unread</button>
+                    <button onClick={() => onStarMark(email.id)}>{starButton(email)}</button>
                     <Link to={`/email/${email.id}`}>
                         <EmailPreview emailItem={email} />
                     </Link>

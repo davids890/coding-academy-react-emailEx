@@ -31,7 +31,7 @@ export function EmailIndex() {
     }
 
     async function onEmailDelete(emailId) {
-        const index = emailList.findIndex(email => email.id === emailId.id);
+        const index = emailList.findIndex(email => email.id === emailId);
         if (index !== -1) {
             const updatedEmailList = [...emailList];
             const emailToRemove = { ...updatedEmailList[index], removedAt: new Date() };
@@ -59,6 +59,7 @@ export function EmailIndex() {
     }
 
     async function onStarMark(emailId) {
+        console.log('emailId: ', emailId);
         const email = await emailService.getById(emailId)
         console.log('email: ', email);
         const emailCopy = {...email, isStarred: !email.isStarred}
