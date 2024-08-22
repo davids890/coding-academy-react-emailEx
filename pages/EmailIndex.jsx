@@ -26,7 +26,6 @@ export function EmailIndex() {
     }
 
     function onFilterBy(filterBy) {
-        console.log('filterBy: ', filterBy);
         setFilterBy(filterBy)
     }
 
@@ -73,7 +72,8 @@ export function EmailIndex() {
         <EmailFilter filterBy={filterBy}  onFilterBy={onFilterBy}/>
         {!id && <EmailList emailList={emailList} onEmailDelete={onEmailDelete} 
             onMarkUnread={onMarkUnread} status={filterBy.status} onStarMark={onStarMark} />}
-
+        <section className="aside-right"></section>
+        <section className="email-index-footer"></section>
         <Outlet /> 
     </section>
 }

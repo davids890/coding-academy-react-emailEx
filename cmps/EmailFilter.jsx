@@ -53,6 +53,7 @@ export function EmailFilter({ filterBy, onFilterBy }) {
 
     return (
         <section className="filter-container">
+            <span className="searchIcon material-symbols-outlined">search</span>
             <input
                 type="text"
                 id="search"

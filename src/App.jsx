@@ -30,5 +30,4 @@ export function App() {
 // TODO: 
 // undelete from trash
 // limit number of words in the preview
-// search - find all the. emails - not only fron the. current status
-// search - find read/unread/all - text search
+// Give visual indication for read/unread in the email preview, and support hover state (show buttons instead of date)

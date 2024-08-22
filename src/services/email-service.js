@@ -46,9 +46,33 @@ function _createEmails() {
 
 async function query(filterBy) {
     let emails = await storageService.query(STORAGE_KEY)
-    
+    // text search
+    // read/unread/all
+    if (filterBy.txt.length > 0) {
+        if (filterBy.txt.startsWith("label:read")) {
+            emails = emails.filter(email => {return email.isRead})
+            console.log(emails);
+            return emails
+        }
+        else if (filterBy.txt.startsWith("label:unread")){
+            emails = emails.filter(email => {return !email.isRead})
+            return emails
+        }
+        else if (filterBy.txt.startsWith("label:all")) {
+            return emails
+        }
+
+        // regular text search - based on the email content
+        emails = emails.filter(email => {
+            return filterBy.txt.length === 0 || 
+                    email.body.toLowerCase().includes(filterBy.txt.toLowerCase()) ||
+                        email.subject.toLowerCase().includes(filterBy.txt.toLowerCase()) ||
+                            email.from.toLowerCase().includes(filterBy.txt.toLowerCase())
+            })
+        }
+
     // inbox search
-    if (filterBy.status === 'Inbox') {
+    if (filterBy.status === 'Inbox' && !filterBy.txt.length > 0) {
         emails = emails.filter(email => {
             return email.to === 'user@appsus.com' && !email.removedAt;
         })
@@ -75,19 +99,6 @@ async function query(filterBy) {
         })
     }
     
-    // text search
-    if (filterBy.txt.length > 0) {
-        emails = emails.filter(email => {
-            return filterBy.txt.length === 0 || 
-                    email.body.toLowerCase().includes(filterBy.txt.toLowerCase()) ||
-                        email.subject.toLowerCase().includes(filterBy.txt.toLowerCase()) ||
-                            email.from.toLowerCase().includes(filterBy.txt.toLowerCase())
-            })
-        }
-
-    // 
-    
-
     return emails
 }
 

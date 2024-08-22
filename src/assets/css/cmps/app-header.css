@@ -2,107 +2,139 @@
         background: lightslategray;
         color: white;
         padding: 20px;
-
     }
     .app-header.nav-bar {
         color: rgb(240, 30, 30);
     }
-
     .app-header section.container {
         display: flex;
         align-items: center;
 
     }
-
     .app-header h1.logo {
         flex-grow: 1;
         font-weight: 600;
     }
-
     .app-header .back {
         flex-grow: 1;
     }
-
     .app-header nav a:not(:last-child) {
         margin-right: 10px;
     }
-
     .app-header section.container>section {
         flex-grow: 1;
     }
+    /* email index */
+    .email-index {
+        display: grid;
+        grid-template-columns: 1fr 4fr 0.2fr;
+        grid-template-rows: 1.1fr 8fr 0.3fr;
+        grid-template-areas:
+            "header header header"
+            "aside-left main aside-right"
+            "footer footer footer";
+        height: 100vh;
+    }
+    .aside-right {
+        grid-area: aside-right;
+        background-color: rgba(16, 143, 227, 0.503);
+    }
+    .email-index-footer {
+        grid-area: footer;
+        background-color: rgba(16, 143, 227, 0.503);
+    }
+    /* search bar */
+    .filter-container {
+        display: grid;
+        grid-area: header;
+        justify-items: center;
+        align-items: center;
 
-    .email-preview-list {
-        list-style-type: none; /* Removes default list bullets */
-        margin-left: 20%; /* Adjust margin as needed */
-        padding: 0; /* Ensure no padding affecting alignment */
+        /* justify-content: center;
+        align-content: center; */
+        background-color: rgba(16, 143, 227, 0.503);
+        position: relative;
+    }
+    .filter-container input {
+        padding: 9px;
+        border: 1.5px solid rgba(0, 0, 0, 0.216);
+        /* Sets the border width and color */
+        border-radius: 12px;
+        /* Rounds the corners of the border */
+        border-style: solid;
+        /* Defines the border style */
+        outline: none;
+        /* Removes default focus outline */
+        width: 100%;
+        /* Adjust width as needed */
+        max-width: 400px;
+        /* Optional: limit max width */
+        padding-left: 40px;
+    }
+    .filter-container .searchIcon {
+        position: absolute;
+        margin-left: 10px;
+        margin-top: 5px;
+    }
+    
+    .email-folder-list {
+        grid-area: aside-left;
+        background-color: rgba(16, 143, 227, 0.503);
+        display: grid;
+        justify-content: center;
+        align-items: start;
+        height: 100%; /* Ensures the list takes full height of the grid area */
+        
+    }
+    .email-folder-list .list {
+        /* list-style-type: none; */
+        /* list-style-type: none; */
+        /* float: center;
+        padding: 0; */
+        /* Remove default padding */
+        /* margin: 0; */
+        /* Remove default margin */
+        /* list-style-type: none; */
+        /* margin-top: 30%; */
+    }
+    .email-folder-list .list li {
+        cursor: pointer;
+        /* Add pointer cursor for clickable items */
+    }
+    .email-folder-list .list li:hover {
+        background-color: rgba(0, 0, 0, 0.1);
+        /* Optional: Highlight on hover */
     }
 
+    /* email preview list */
+    .email-preview-list {
+        grid-area: main;
+        list-style-type: none;
+        display: grid;
+        justify-items: left;
+        height: 100px;
+        gap: 10px;
+        /* Removes default list bullets */
+    }
     .email-preview-list li {
-        text-align: left; /* Ensures text is aligned to the left */
-        padding-top: 20px;
+        grid-template-columns: 1fr 1fr 1fr;
+
+        /* padding-top: 20px;
         padding-bottom: 20px;
-        border-bottom: 1.1px solid rgba(128, 128, 128, 0.329);
-        text-align: center;
+        border-bottom: 1.1px solid rgba(128, 128, 128, 0.329); */
     }
     .email-preview-list li:hover {
-        background-color: rgba(0, 0, 0, 0.1); /* Optional: Highlight on hover */
+        background-color: rgba(0, 0, 0, 0.1);
+        /* Optional: Highlight on hover */
     }
-
     .email-item {
         font-weight: bold;
     }
     .clicked {
         font-weight: normal;
     }
-
-    .filter-container {
-        display: flex;
-        flex-direction: column; /* Stack label and input vertically */
-        width: 70%; /* Ensure it takes full width */
-        padding-top: 3%;
-        padding-left: 9%;
-        padding-right: 3%;
-
-    }
-    .filter-container input {
-        padding: 9px;
-        border: 1.5px solid rgba(0, 0, 0, 0.216); /* Sets the border width and color */
-        border-radius: 12px; /* Rounds the corners of the border */
-        border-style: solid; /* Defines the border style */
-        outline: none; /* Removes default focus outline */
-        width: 100%; /* Adjust width as needed */
-        max-width: 400px; /* Optional: limit max width */
-    }
-
-    .email-folder-list {
-        background-color: rgba(162, 185, 185, 0.276);
-        float: left;
-        width: 20%;
-        padding-right: 2%;
-        padding-left: 2%;
-        height: 100vh;
-    }
-    .email-folder-list .list {
-        float: center;
-        padding: 0; /* Remove default padding */
-        margin: 0; /* Remove default margin */
-        list-style-type: none;
-        margin-top: 30%;
-    }
-
-    .email-folder-list .list li {
-        cursor: pointer; /* Add pointer cursor for clickable items */
-        padding: 20%; /*Add padding for better spacing */
-    }
-
-    .email-folder-list .list li:hover {
-        background-color: rgba(0, 0, 0, 0.1); /* Optional: Highlight on hover */
-    }
-
     .email-details {
         text-align: center;
     }
 
 
-
-    /* email - correct place ? */
