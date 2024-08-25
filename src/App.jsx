@@ -31,3 +31,10 @@ export function App() {
 // undelete from trash
 // limit number of words in the preview
 // Give visual indication for read/unread in the email preview, and support hover state (show buttons instead of date)
+// hover email list - need help
+// round the grid - need help
+// fix the search
+// add gmail icon
+// add menu 
+// add mark email box
+

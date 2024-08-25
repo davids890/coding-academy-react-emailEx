@@ -52,16 +52,22 @@ export function EmailFilter({ filterBy, onFilterBy }) {
     }
 
     return (
-        <section className="filter-container">
-            <span className="searchIcon material-symbols-outlined">search</span>
-            <input
-                type="text"
-                id="search"
-                value={filterText}
-                onChange={handleChange}
-                placeholder="Search..."
-            />
-        </section>
+        <header className="email-filter-header">
+            <div className="icon-text-container">
+                <img className="gmail-left-icon" src="/coding-academy-react-emailEx/images/gmail.png" alt="gmailIcon"/>
+                <span className="gmail-left-text">Gmail</span>
+            </div>
+            <section className="filter-container">
+                <span className="searchIcon material-symbols-outlined">search</span>
+                <input
+                    type="text"
+                    id="search"
+                    value={filterText}
+                    onChange={handleChange}
+                    placeholder="Search..."
+                />
+            </section>
+        </header>
     );
 }
 

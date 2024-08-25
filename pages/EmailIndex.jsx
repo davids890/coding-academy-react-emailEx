@@ -58,9 +58,7 @@ export function EmailIndex() {
     }
 
     async function onStarMark(emailId) {
-        console.log('emailId: ', emailId);
         const email = await emailService.getById(emailId)
-        console.log('email: ', email);
         const emailCopy = {...email, isStarred: !email.isStarred}
         await emailService.save(emailCopy)
         await loadEmails()
