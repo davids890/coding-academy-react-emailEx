@@ -1,0 +1,47 @@
+    /* preview */
+    .email-preview-list {
+        grid-area: main;
+        display: grid;
+        grid-template-columns: 0.5fr 0.5fr 4fr 1fr;
+        grid-auto-rows: minmax(80px, auto);
+        gap: 10px;
+        align-items: center;
+        align-content: start;
+        padding: 20px;
+        font-size: 1.3em;
+        background-color: rgb(236, 235, 246); 
+        border-radius: 30px; 
+    }
+    .email-buttons {
+        grid-column: 4;
+        display: none;
+    }
+
+    .email-item {
+        display: contents;
+        font-weight: bold;
+    }
+    .email-item .email-buttons {
+        display: block;
+    }
+    .clicked {
+        font-weight: normal;
+    }
+    .email-name {
+        grid-column: 2;
+    }
+    .email-body {
+        grid-column: 3;
+    }
+    .email-date {
+        grid-column: 4;
+    }
+
+    .email-mark-side {
+        display: flex;
+        grid-column: 1;
+        gap: 7px;
+    }
+    .email-mark-side .input-checkbox{
+        transform: scale(1.7);
+    }

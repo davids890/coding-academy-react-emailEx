@@ -6,14 +6,17 @@ import starImage from "../images/star-filled.svg"
 export function EmailList({emailList, onEmailDelete, onMarkUnread, status, onStarMark}) {
 
     function starButton(email) {
-        if (email.isStarred) {return <img src={starImage} alt="star" style={{ width: 24, height: 24 }} />}
-        else {return <span class="material-symbols-outlined">star_outline</span>}
+        if (email.isStarred) {return <img src={starImage} alt="star" className="star-icon" style={{ width: 14, height: 14 }} />}
+        else {return <span class="material-symbols-outlined material-star">star_outline</span>}
     }
     function readUnreadButton(email) {
         if (email.isRead) {return <span class="material-symbols-outlined">mark_email_read</span>}
         else {return <span class="material-symbols-outlined">mark_email_unread</span>}
     }
-    
+    function deleteButton(email) {
+        return <span class="material-symbols-outlined">delete</span>
+    }
+
     return (
         <div className="email-preview-list">
             {emailList.map((email) => {
@@ -39,8 +42,11 @@ export function EmailList({emailList, onEmailDelete, onMarkUnread, status, onSta
                                 onMarkUnread={onMarkUnread}
                                 onStarMark ={onStarMark}
                                 readUnreadButton={readUnreadButton}
+                                deleteButton={deleteButton}
                             />
                         </Link>
+
+                        //TODO: div that act like Link, modify the url
 
                 );
             })}

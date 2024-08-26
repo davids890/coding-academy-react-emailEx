@@ -9,6 +9,15 @@
 
 /* Components */
 @import "./cmps/app-header.css";
+@import "./cmps/email-index.css";
+@import "./cmps/email-filter.css";
+@import "./cmps/icons.css";
+@import "./cmps/folder-list.css";
+@import "./cmps/email-preview.css";
+@import "./cmps/aside-right.css";
+@import "./cmps/footer.css";
+@import "./cmps/email-details.css";
+
 
 
 

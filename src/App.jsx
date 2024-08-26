@@ -30,11 +30,20 @@ export function App() {
 // TODO: 
 // undelete from trash
 // limit number of words in the preview
-// Give visual indication for read/unread in the email preview, and support hover state (show buttons instead of date)
-// hover email list - need help
-// round the grid - need help
+// 1. Give visual indication for read/unread in the email preview, and support hover state (show buttons instead of date)
+// 3. round the grid - need help
+// 4. add gmail icon - text next to the icon
+// 5. add mark email box
+// 2. hover email list - need help
 // fix the search
-// add gmail icon
 // add menu 
-// add mark email box
+// take care of the email preview
 
+// 5. there is input checkbox (type) ?
+// 1.  ? the button should be in hiden mode, then check if we are in  hover preview -> the buttons will in display block/flex, all the buttons should be in div - buttom container class, and on this container put the opacity on 0
+// ? fix the star size
+// add compose
+// fix email details
+
+// 3. change the opacity - V
+// 4. should be in the same div, flex + alighn center etc.  - V

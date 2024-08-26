@@ -1,0 +1,23 @@
+    /* folder list */
+    .email-folder-list {
+        grid-area: aside-left;
+        /* background-color: rgba(16, 143, 227, 0.503); */
+        display: grid;
+        justify-items: stretch;
+        align-items: stretch;
+        padding-top: 30px;        
+        grid-template-rows: 1fr  1fr  1fr 1fr 4fr;
+        font-size: 1.5em;
+        color: white;
+        font-weight: bold;
+        cursor: pointer;
+    }
+    .folder-item {
+        display: flex; 
+        align-items: center;
+        justify-content: center;
+        padding: 10px; /* Add padding if needed */
+    }
+    .folder-item:hover {
+        background-color: rgba(250, 246, 246, 0.236);
+    }

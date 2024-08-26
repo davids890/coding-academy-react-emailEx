@@ -113,7 +113,7 @@ function createDummyEmails() {
             body: 'Would love to catch up sometimes',
             isRead: false,
             isStarred: false,
-            sentAt : 1551133930594,
+            sentAt : "2024-08-26",
             removedAt : null, //for later use
             from: 'momo@momo.com',
             to: 'user@appsus.com'
@@ -124,7 +124,7 @@ function createDummyEmails() {
             body: 'Would love to catch up sometimes2',
             isRead: false,
             isStarred: true,
-            sentAt : 1551133930594_2,
+            sentAt : "2024-08-26",
             removedAt : null, //for later use
             from: 'momo@momo.com',
             to: 'user@appsus.com'
@@ -132,10 +132,10 @@ function createDummyEmails() {
             {
             id: 'e103',
             subject: 'Miss you3!',
-            body: 'Would love to catch up sometimes3',
+            body: 'Would love to catch up sometimes3: lkjlkjlkjlkjlkjlkjlkjlkjlkjlkjlkjlkjlkjlkjlkjlkjlkjlkjlkjlkjlkj',
             isRead: false,
             isStarred: true,
-            sentAt : 1551133930594_2,
+            sentAt : "2024-08-26",
             removedAt : null, //for later use
             from: 'user@appsus.com',
             to: 'someone@someone.com'
@@ -146,7 +146,7 @@ function createDummyEmails() {
             body: 'Would love to catch up sometimes4',
             isRead: false,
             isStarred: false,
-            sentAt : 1551133930594_2,
+            sentAt : "2024-08-26",
             removedAt : null, //for later use
             from: 'user@appsus.com',
             to: 'someone@someone.com'
@@ -157,7 +157,7 @@ function createDummyEmails() {
             body: 'Would love to catch up sometimes5',
             isRead: false,
             isStarred: false,
-            sentAt : 1551133930594_2,
+            sentAt : "2024-08-26",
             removedAt : null, //for later use
             from: 'user@appsus.com',
             to: 'someone@someone.com'
@@ -168,7 +168,7 @@ function createDummyEmails() {
             body: 'Would love to catch up sometimes6',
             isRead: false,
             isStarred: false,
-            sentAt : 1551133930594_2,
+            sentAt : "2024-08-26",
             removedAt : null, //for later use
             from: 'user@appsus.com',
             to: 'someone@someone.com'

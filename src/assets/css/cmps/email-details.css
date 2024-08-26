@@ -1,0 +1,8 @@
+.email-details {
+    color: black;
+    font-size: 2em;
+    background-color: rgb(236, 235, 246);
+    border-radius: 30px;
+    padding: 20px;
+    /* TODO: add grid/flex */
+}
