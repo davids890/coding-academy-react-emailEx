@@ -44,6 +44,4 @@ export function App() {
 // ? fix the star size
 // add compose
 // fix email details
-
-// 3. change the opacity - V
-// 4. should be in the same div, flex + alighn center etc.  - V
+// import icons from icons.service doesn't work

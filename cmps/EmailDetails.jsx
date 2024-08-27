@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react"
 import { useParams } from "react-router"
-import { emailService } from "../src/services/email-service"
+import { emailService } from "../src/services/email.service"
 import { Link } from "react-router-dom"
 
 

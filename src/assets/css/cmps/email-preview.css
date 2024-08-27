@@ -12,21 +12,22 @@
         background-color: rgb(236, 235, 246); 
         border-radius: 30px; 
     }
-    .email-buttons {
-        grid-column: 4;
-        display: none;
-    }
-
-    .email-item {
-        display: contents;
-        font-weight: bold;
-    }
-    .email-item .email-buttons {
-        display: block;
-    }
+    
     .clicked {
         font-weight: normal;
     }
+    .email-item {
+        display: contents;
+        font-weight: bold;
+        cursor: pointer;
+    }
+    /* .email-item:hover .email-date {
+        display: none;
+    } */
+    /* .email-item:hover .email-buttons{
+        display: flex;
+        gap: 20px;
+    } */
     .email-name {
         grid-column: 2;
     }
@@ -36,7 +37,12 @@
     .email-date {
         grid-column: 4;
     }
+    .email-buttons {
+        grid-column: 4;
+        display: flex;
+    }
 
+    /* left side marker */
     .email-mark-side {
         display: flex;
         grid-column: 1;

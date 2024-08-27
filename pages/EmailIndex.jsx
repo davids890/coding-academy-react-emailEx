@@ -3,7 +3,7 @@ import { Outlet, useParams } from "react-router-dom";
 
 
 import { EmailList } from "../cmps/EmailList"
-import { emailService } from "../src/services/email-service.js"
+import { emailService } from "../src/services/email.service.js"
 import { EmailFilter } from "../cmps/EmailFilter.jsx";
 import { EmailFolderList } from "../cmps/EmailFolderList.jsx";
 
