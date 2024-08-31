@@ -61,7 +61,7 @@ import { EmailPreview } from "./EmailPreview";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import starImage from "../images/star-filled.svg";
-// import { iconsService } from "../src/services/icons.service.js"
+import { iconsService } from "../src/services/icons.service.js"
 
 
 
@@ -72,7 +72,8 @@ export function EmailList({ emailList, onEmailDelete, onMarkUnread, status, onSt
         if (email.isStarred) {
             return <img src={starImage} alt="star" className="star-icon" style={{ width: 14, height: 14 }} />;
         } else {
-            return <span className="material-symbols-outlined material-star" >star_outline</span>;
+            // return <span className="material-symbols-outlined material-star" >star_outline</span>;
+            return <span className="material-symbols-outlined material-star" >star</span>;
             // const a = iconsService.getFullStar()
             // console.log(a);
             // return null

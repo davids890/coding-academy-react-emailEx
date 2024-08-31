@@ -11,11 +11,11 @@
 
                 <div className="email-buttons">
                     <div onClick={(e) => { e.preventDefault(); e.stopPropagation(); onEmailDelete(emailItem.id); }} 
-                            className="email-date">{deleteButton(emailItem)}</div>
+                            >{deleteButton(emailItem)}</div>
                     <div onClick={(e) => { e.preventDefault(); e.stopPropagation(); onMarkUnread(emailItem.id); }} 
-                            className="email-date">{readUnreadButton(emailItem)}</div>
+                            >{readUnreadButton(emailItem)}</div>
                     <div onClick={(e) => { e.preventDefault(); e.stopPropagation(); onStarMark(emailItem.id); }} 
-                            className="email-date">{starButton(emailItem)}</div>
+                            >{starButton(emailItem)}</div>
                 </div>
             </>
         );

@@ -21,13 +21,13 @@
         font-weight: bold;
         cursor: pointer;
     }
-    /* .email-item:hover .email-date {
+    .email-item:hover .email-date {
         display: none;
-    } */
-    /* .email-item:hover .email-buttons{
+    }
+    .email-item:hover .email-buttons{
         display: flex;
         gap: 20px;
-    } */
+    }
     .email-name {
         grid-column: 2;
     }
@@ -39,7 +39,7 @@
     }
     .email-buttons {
         grid-column: 4;
-        display: flex;
+        display: none;
     }
 
     /* left side marker */

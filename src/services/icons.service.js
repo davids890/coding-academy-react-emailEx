@@ -1,3 +1,5 @@
+import React from 'react';
+
 export const iconsService = {
     getOutlineStar,
     getFullStar,
@@ -8,9 +10,9 @@ export const iconsService = {
 
 function getOutlineStar() {
     return null;
-    // return <span className="material-symbols-outlined material-star-outline">star_outline</span>;
+    // return React.createElement('span', { className: 'material-symbols-outlined material-star-outline' }, 'star_outline');
 }
 
 function getFullStar() {
-    return <span className="material-symbols-outlined material-star">star</span>;
+    return React.createElement('span', { className: 'material-symbols-outlined material-star' }, 'star');
 }

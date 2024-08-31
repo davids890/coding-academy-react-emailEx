@@ -39,9 +39,9 @@ export function App() {
 // add menu 
 // take care of the email preview
 
-// 5. there is input checkbox (type) ?
+// ? fix the star size ? import button ?
 // 1.  ? the button should be in hiden mode, then check if we are in  hover preview -> the buttons will in display block/flex, all the buttons should be in div - buttom container class, and on this container put the opacity on 0
-// ? fix the star size
+// 5. there is input checkbox (type) ?
 // add compose
 // fix email details
-// import icons from icons.service doesn't work
+
