@@ -1,24 +1,28 @@
 import { useState, useEffect } from "react"
 import { Outlet, useParams } from "react-router-dom";
-
-
 import { EmailList } from "../cmps/EmailList"
 import { emailService } from "../src/services/email.service.js"
 import { EmailFilter } from "../cmps/EmailFilter.jsx";
 import { EmailFolderList } from "../cmps/EmailFolderList.jsx";
+import { useSearchParams } from "react-router-dom";
+import { getExistingProperties } from "../src/services/util.service.js";
+import { EmailCompose } from "../cmps/EmailCompose.jsx";
+
 
 export function EmailIndex() {
     const [ emailList, setEmails ] = useState([])
-    const [ filterBy, setFilterBy ] = useState(emailService.getDefaultFilter())
-    const {id} = useParams()
+    const [ searchParams, SetSearchParams ] = useSearchParams()
+    const [ filterBy, setFilterBy ] = useState(emailService.getFilterFromSearchParams(searchParams))
+    const {id, folder} = useParams()
 
     useEffect(() => {
         loadEmails()
-    }, [filterBy, id])
+        SetSearchParams(getExistingProperties(filterBy)) // SetSearchParams - put the filterBy values in the url
+    }, [filterBy, folder])
     
     async function loadEmails() {
         try {
-            const emails = await emailService.query(filterBy) 
+            const emails = await emailService.query(filterBy, folder) 
             setEmails(emails)
         } catch (error) {
             console.log(error);
@@ -41,7 +45,7 @@ export function EmailIndex() {
     
             // Persist the change in storage
             try {
-                if (filterBy.status === 'Trash') await emailService.remove(emailToRemove.id);
+                if (folder === 'trash') await emailService.remove(emailToRemove.id);
                 else await emailService.save(emailToRemove);
                 await loadEmails();  // Re-fetch emails to ensure consistency with the server
             } catch (error) {
@@ -64,14 +68,19 @@ export function EmailIndex() {
         await loadEmails()
     }
     
-
+    function onEmailCompose(a){
+        console.log('a...', a);
+        console.log('onEmailCompose...');
+    }
+    
     return <section className="email-index">
-        <EmailFolderList filterBy={filterBy}  onFilterBy={onFilterBy}/>
+        <EmailFolderList onEmailCompose={onEmailCompose}/>
         <EmailFilter filterBy={filterBy}  onFilterBy={onFilterBy}/>
         {!id && <EmailList emailList={emailList} onEmailDelete={onEmailDelete} 
-            onMarkUnread={onMarkUnread} status={filterBy.status} onStarMark={onStarMark} />}
+            onMarkUnread={onMarkUnread} onStarMark={onStarMark} />}
         <section className="aside-right"></section>
         <section className="email-index-footer"></section>
         <Outlet /> 
+        {/* add if id put details else regular list */}
     </section>
 }

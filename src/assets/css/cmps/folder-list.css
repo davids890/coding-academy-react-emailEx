@@ -1,23 +1,49 @@
-    /* folder list */
-    .email-folder-list {
-        grid-area: aside-left;
-        /* background-color: rgba(16, 143, 227, 0.503); */
-        display: grid;
-        justify-items: stretch;
-        align-items: stretch;
-        padding-top: 30px;        
-        grid-template-rows: 1fr  1fr  1fr 1fr 4fr;
-        font-size: 1.5em;
-        color: white;
-        font-weight: bold;
-        cursor: pointer;
-    }
-    .folder-item {
-        display: flex; 
-        align-items: center;
-        justify-content: center;
-        padding: 10px; /* Add padding if needed */
-    }
-    .folder-item:hover {
-        background-color: rgba(250, 246, 246, 0.236);
-    }
+
+.email-folder-list {
+    grid-area: aside-left;
+    /* background-color: rgba(16, 143, 227, 0.503); */
+    display: grid;
+    justify-items: stretch;
+    align-items: stretch;
+    padding-top: 30px;        
+    grid-template-rows: 1.3fr 1fr 1fr 1fr 1fr 1fr 4fr;
+    font-size: 1.5em;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+}
+.folder-item {
+    display: flex; 
+    align-items: center;
+    justify-content: center;
+    padding: 10px; /* Add padding if needed */
+}
+.folder-item:hover {
+    background-color: rgba(250, 246, 246, 0.236);
+}
+
+/* .email-compose {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1em;
+    color: white;
+} */
+
+.email-compose {
+    display: inline-block; /* Use inline-block to ensure the background fits the content */
+    font-size: 1em; /* Slightly larger font size for emphasis */
+    color: rgb(44, 42, 42);
+    /* background-color: rgba(255, 255, 255, 0.489); Blue background */
+    background-color: rgb(236, 235, 246); 
+
+    padding: 20px 20px; /* Padding around the text */
+    border-radius: 20px 20px; /* Rounded corners */
+    cursor: pointer; /* Pointer cursor to indicate it's clickable */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Optional shadow for depth */
+    margin-bottom: 20px; /* Space below the compose button */
+    text-align: center; /* Center text */
+    width: auto; /* Ensure width is auto to fit content */
+    justify-self: center; /* Align self to start horizontally within the grid */
+    align-self: start; /* Align self to start vertically within the grid */
+}

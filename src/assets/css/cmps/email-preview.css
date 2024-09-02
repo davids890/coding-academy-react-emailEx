@@ -13,13 +13,13 @@
         border-radius: 30px; 
     }
     
-    .clicked {
-        font-weight: normal;
-    }
     .email-item {
         display: contents;
         font-weight: bold;
         cursor: pointer;
+    }
+    .clicked {
+        font-weight: normal;
     }
     .email-item:hover .email-date {
         display: none;

@@ -7,6 +7,7 @@ export const emailService = {
     remove,
     getById,
     getDefaultFilter,
+    getFilterFromSearchParams,
 }
 
 const STORAGE_KEY = 'emails'
@@ -35,7 +36,6 @@ function save(emailToSave) {
     }
 }
 
-
 function _createEmails() {
     let emails = utilService.loadFromStorage(STORAGE_KEY)
     if (!emails || !emails.length) {
@@ -44,7 +44,7 @@ function _createEmails() {
     }
 }
 
-async function query(filterBy) {
+async function query(filterBy, folder) {
     let emails = await storageService.query(STORAGE_KEY)
     // text search
     // read/unread/all
@@ -72,20 +72,20 @@ async function query(filterBy) {
         }
 
     // inbox search
-    if (filterBy.status === 'Inbox' && !filterBy.txt.length > 0) {
+    if (folder === 'Inbox' && !filterBy.txt.length > 0) {
         emails = emails.filter(email => {
             return email.to === 'user@appsus.com' && !email.removedAt;
         })
     }
     
     // sent search
-    if (filterBy.status === 'Sent') {
+    if (folder === 'sent') {
         emails = emails.filter(email => {
             return email.to !== 'user@appsus.com' && !email.removedAt;
         })
     }
     // star search
-    if (filterBy.status === 'Starred') {
+    if (folder === 'starred') {
         emails = emails.filter(email => {
 
             return email.isStarred && !email.removedAt;
@@ -93,9 +93,16 @@ async function query(filterBy) {
     }
     
     // trash search
-    if (filterBy.status === 'Trash') {
+    if (folder === 'trash') {
         emails = emails.filter(email => {
             return email.removedAt
+        })
+    }
+    
+    // draft search
+    if (folder === 'draft') {
+        emails = emails.filter(email => {
+            return email.draft
         })
     }
     
@@ -103,7 +110,8 @@ async function query(filterBy) {
 }
 
 function getDefaultFilter() {
-    return {'status': 'Inbox', 'txt': '', 'isRead': null}
+    // return {'status': 'Inbox', 'txt': '', 'isRead': null, 'compose': false} TODO: remove status
+    return {'txt': '', 'isRead': null, 'compose': false}
 }
 
 function createDummyEmails() {
@@ -116,7 +124,8 @@ function createDummyEmails() {
             sentAt : "2024-08-26",
             removedAt : null, //for later use
             from: 'momo@momo.com',
-            to: 'user@appsus.com'
+            to: 'user@appsus.com',
+            draft: false,
             },
             {
             id: 'e102',
@@ -127,7 +136,8 @@ function createDummyEmails() {
             sentAt : "2024-08-26",
             removedAt : null, //for later use
             from: 'momo@momo.com',
-            to: 'user@appsus.com'
+            to: 'user@appsus.com',
+            draft: false,
             },
             {
             id: 'e103',
@@ -138,7 +148,8 @@ function createDummyEmails() {
             sentAt : "2024-08-26",
             removedAt : null, //for later use
             from: 'user@appsus.com',
-            to: 'someone@someone.com'
+            to: 'someone@someone.com',
+            draft: false,
             },
             {
             id: 'e104',
@@ -149,7 +160,8 @@ function createDummyEmails() {
             sentAt : "2024-08-26",
             removedAt : null, //for later use
             from: 'user@appsus.com',
-            to: 'someone@someone.com'
+            to: 'someone@someone.com',
+            draft: false,
             },
             {
             id: 'e105',
@@ -160,7 +172,8 @@ function createDummyEmails() {
             sentAt : "2024-08-26",
             removedAt : null, //for later use
             from: 'user@appsus.com',
-            to: 'someone@someone.com'
+            to: 'someone@someone.com',
+            draft: false,
             },
             {
             id: 'e106',
@@ -171,48 +184,18 @@ function createDummyEmails() {
             sentAt : "2024-08-26",
             removedAt : null, //for later use
             from: 'user@appsus.com',
-            to: 'someone@someone.com'
+            to: 'someone@someone.com',
+            draft: false,
             },
 
     ]
 }
 
-
-// export const robotService = {
-//     // query,
-//     save,
-//     remove,
-//     getById,
-//     // createRobot,
-// }
-
-
-// function createRobot(model = '', type = '', batteryStatus = 100) {
-//     return {
-//         model,
-//         batteryStatus,
-//         type
-//     }
-// }
-
-// async function query(filterBy) {
-//     const robots = await storageService.query(STORAGE_KEY)
-//     if (filterBy) {
-//         var { type, maxBatteryStatus, minBatteryStatus, model } = filterBy
-//         maxBatteryStatus = maxBatteryStatus || Infinity
-//         minBatteryStatus = minBatteryStatus || 0
-//         robots = robots.filter(robot => robot.type.toLowerCase().includes(type.toLowerCase()) && robot.model.toLowerCase().includes(model.toLowerCase())
-//             && (robot.batteryStatus < maxBatteryStatus)
-//             && robot.batteryStatus > minBatteryStatus)
-//     }
-//     return robots
-// }
-
-// function save(emailToSave) {
-//     if (emailToSave.id) {
-//         return storageService.put(STORAGE_KEY, emailToSave)
-//     } else {
-//         emailToSave.isOn = false
-//         return storageService.post(STORAGE_KEY, robotToSave)
-//     }
-// }
+function getFilterFromSearchParams(searchParams) {
+    const defaultFilter = getDefaultFilter()
+    const filterBy = {}
+    for (const field in defaultFilter) {
+        filterBy[field] = searchParams.get(field) || ''
+    }
+    return filterBy
+}

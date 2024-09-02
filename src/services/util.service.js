@@ -22,3 +22,14 @@ function loadFromStorage(key, defaultValue = null) {
     var value = localStorage[key] || defaultValue;
     return JSON.parse(value);
 }
+
+export function getExistingProperties(obj) {
+    const truthyObj = {}
+    for (const key in obj) {
+        const val = obj[key]
+        if (val || typeof val === 'boolean') {
+            truthyObj[key] = val
+        }
+    }
+    return truthyObj
+}
