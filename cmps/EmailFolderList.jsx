@@ -1,25 +1,28 @@
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { EmailCompose } from "./EmailCompose";
-
 
 export function EmailFolderList({onEmailCompose }) {
     const navigate = useNavigate();
+    const { folder } = useParams()
+
 
     function onFolderClick(status) {
-        console.log('status: ', status);
         navigate(`/email/${status.toLowerCase()}/`);
     }
+    function handleComposeClick() {
+        navigate(`/email/${folder}/?compose=new`);
+        }
 
     return (
         <div className="email-folder-list">
-            <EmailCompose onEmailCompose={onEmailCompose}/> 
+            {/* <EmailCompose onEmailCompose={onEmailCompose}/>  */}
+            <div onClick={handleComposeClick} className="email-compose">Compose</div>
             <div onClick={() => onFolderClick('Inbox')} className="folder-item">Inbox</div>
             <div onClick={() => onFolderClick('Sent')} className="folder-item">Sent</div>
             <div onClick={() => onFolderClick('Starred')} className="folder-item">Starred</div>
             <div onClick={() => onFolderClick('Trash')} className="folder-item">Trash</div>
             <div onClick={() => onFolderClick('Draft')} className="folder-item">Draft</div>
         </div>
-
     );
 }
 

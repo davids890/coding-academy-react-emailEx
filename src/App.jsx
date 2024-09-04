@@ -47,3 +47,4 @@ export function App() {
 
 
 // unread email doesn;t work
+// delete doesn't work

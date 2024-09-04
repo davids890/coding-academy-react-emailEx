@@ -71,6 +71,7 @@ async function query(filterBy, folder) {
             })
         }
 
+    //TODO: use switch case for the folder ifltering + you can split to filter by folder and filter by text functions
     // inbox search
     if (folder === 'Inbox' && !filterBy.txt.length > 0) {
         emails = emails.filter(email => {

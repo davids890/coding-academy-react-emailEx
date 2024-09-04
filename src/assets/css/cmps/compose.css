@@ -1,0 +1,45 @@
+.compose {
+    display: grid;
+    /* inset: 0; ? */
+
+    
+    grid-template-rows: 1fr 1fr 1fr 5fr 2fr;
+    height: 80vh;
+    width: 83vw;
+    
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    
+    margin: auto; /* This will center the grid ?? why ?*/ 
+    background-color: white; /* Optional: For visibility */
+
+    z-index: 10;
+    border-radius: 20px;
+}
+
+.compose .header {
+    grid-row: 1;
+    padding: 10px;
+    margin-left: 5px;
+}
+
+.compose .to-cell {
+    grid-row: 2;
+
+}
+.compose .subject-cell {
+    grid-row: 3;
+
+}
+.compose .content-cell {
+    grid-row: 4;
+
+}
+.compose .submit-cell {
+    grid-row: 5;
+
+}
+

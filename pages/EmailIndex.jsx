@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react"
-import { Outlet, useParams } from "react-router-dom";
+import { Outlet, useParams, Link, useNavigate } from "react-router-dom";
 import { EmailList } from "../cmps/EmailList"
 import { emailService } from "../src/services/email.service.js"
 import { EmailFilter } from "../cmps/EmailFilter.jsx";
@@ -14,6 +14,9 @@ export function EmailIndex() {
     const [ searchParams, SetSearchParams ] = useSearchParams()
     const [ filterBy, setFilterBy ] = useState(emailService.getFilterFromSearchParams(searchParams))
     const {id, folder} = useParams()
+    const isCompose = searchParams.get('compose') === 'new'
+    const navigate = useNavigate();
+
 
     useEffect(() => {
         loadEmails()
@@ -73,7 +76,13 @@ export function EmailIndex() {
         console.log('onEmailCompose...');
     }
     
+    function onExitCompose() {
+        console.log('folder: ', folder);
+        navigate(`/email/${folder}/`);
+    }
+
     return <section className="email-index">
+        {isCompose && <EmailCompose onExitCompose={onExitCompose}/>}
         <EmailFolderList onEmailCompose={onEmailCompose}/>
         <EmailFilter filterBy={filterBy}  onFilterBy={onFilterBy}/>
         {!id && <EmailList emailList={emailList} onEmailDelete={onEmailDelete} 
