@@ -48,3 +48,6 @@ export function App() {
 
 // unread email doesn;t work
 // delete doesn't work
+
+
+//unread count - add function in the service and return the unread count

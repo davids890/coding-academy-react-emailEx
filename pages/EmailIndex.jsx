@@ -16,11 +16,15 @@ export function EmailIndex() {
     const {id, folder} = useParams()
     const isCompose = searchParams.get('compose') === 'new'
     const navigate = useNavigate();
+    
 
 
     useEffect(() => {
+        console.log('before load');
         loadEmails()
+        console.log('after load');
         SetSearchParams(getExistingProperties(filterBy)) // SetSearchParams - put the filterBy values in the url
+        // return ()=
     }, [filterBy, folder])
     
     async function loadEmails() {
@@ -80,6 +84,8 @@ export function EmailIndex() {
         console.log('folder: ', folder);
         navigate(`/email/${folder}/`);
     }
+
+    console.log(emailList);
 
     return <section className="email-index">
         {isCompose && <EmailCompose onExitCompose={onExitCompose}/>}

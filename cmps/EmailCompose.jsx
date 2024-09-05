@@ -4,42 +4,60 @@ import { useNavigate, useSearchParams, useParams, } from "react-router-dom";
 
 export function EmailCompose( {onExitCompose} ) {
     console.log('compose in');
-    const [ formData, setForm ] = useState({'To': 'To...', 'Subject': 'Subject...', 'Content': 'Content...'})
+    const [ formData, setFormData ] = useState({'To': 'To...', 'Subject': 'Subject...', 'Content': 'Content...'})
+    const [ viewState, setViewState ] = useState('normal')
     
+    // SetwindowViewState
     // Log the updated formData after it changes
     useEffect(() => {
-    }, [formData]); // The effect runs when formData changes
+    }, [formData, viewState]); // The effect runs when formData changes
 
     function onSubmitHandler(event) {
-        event.preventDefault();
-        const data = {'To': event.target.To.value, 'Subject': event.target.Subject.value, 'Content': event.target.Content.value, }
-        setForm(data)
+        const { To, Subject, Content } = event.target;
+        // console.log('onSubmitHandler');
+        // event.preventDefault()
+        // const data = {'To': event.target.to.value, 'Subject': event.target.subject.value, 'Content': event.target.content.value}
+        // setForm(data)
+
+        //TODO: On add Mail
+        // draft - save all the time the incoming changes, then implement the debounce and save as draft
+        // from the draft if the emails opens - use EmailEdit compoenent (using the email id) (anew email as no id)
+        // 
+    }
+
+    function handleInputChange(ev) {
+        setFormData({...formData, [ev.target.name]: ev.target.value})
+    }
+
+    function SetwindowViewState(viewStatus){
+        switch (viewStatus) {
+            case 'normal':
+                return normal
+        }
+    }
+    function OnsetViewState(in_) {
+        setViewState(in_)
     }
     
     return (
-        <div className="compose">
-            <form onSubmit={onSubmitHandler}>
-                <div className="header">New message</div>
-                <div className="to-cell">
-                    <input type="text" name="To" placeholder="To..." />
+        <div>
+            <form className={`compose-form ${viewState}`} onSubmit={onSubmitHandler}>
+                <div className="header">
+                    <span className="msg-text">New message</span>
+                    <button className="view-big" onClick={() => OnsetViewState('big')} >big view</button>
                 </div>
+                
+                <input className="to" type="email" name="To" placeholder="To..." value={formData.To} onChange={handleInputChange}/>
 
-                <div className="subject-cell">
-                    <input type="text" name="Subject" placeholder="Subject..."/>
-                </div>
+                <input className="subject" type="text" name="Subject" placeholder="Subject..." id="X" value={formData.Subject} onChange={handleInputChange}/>
 
-                <div className="content-cell">
-                    <input type="text" name="Content" placeholder="Content..."/>
-                </div>
+                <textarea className="content" name="Content" id="" placeholder="Type your content here..." value={formData.Content} onChange={handleInputChange}></textarea>
 
-                <div className="submit-cell">
-                <button type="Submit">Submit</button>
-                <button onClick={(e) => {e.preventDefault(); onExitCompose()}} >X</button>
+                <div className="footer">
+                    <button className="submit" type="Submit">Send</button>
+                    <button className="delete" onClick={(e) => {e.preventDefault(); onExitCompose()}}>Discard Draft</button>
                 </div>
             </form>
         </div>
-
     )
 }
-
-// onClick={(e) => { e.preventDefault(); e.stopPropagation(); onStarMark(email.id); }} 

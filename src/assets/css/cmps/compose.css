@@ -1,11 +1,9 @@
-.compose {
+.compose-form {
     display: grid;
-    /* inset: 0; ? */
-
     
-    grid-template-rows: 1fr 1fr 1fr 5fr 2fr;
-    height: 80vh;
-    width: 83vw;
+    grid-template-rows: 0.45fr 0.45fr 0.45fr 6fr 0.45fr;
+    /* height: 80vh;
+    width: 83vw; */
     
     position: fixed;
     top: 0;
@@ -13,21 +11,76 @@
     right: 0;
     bottom: 0;
     
-    margin: auto; /* This will center the grid ?? why ?*/ 
-    background-color: white; /* Optional: For visibility */
+    margin: auto; 
+    background-color: white;
 
     z-index: 10;
     border-radius: 20px;
 }
-
-.compose .header {
-    grid-row: 1;
-    padding: 10px;
-    margin-left: 5px;
+.compose-form.big {
+    height: 80vh;
+    width: 83vw;
+}
+.compose-form.normal {
+    height: 50vh;
+    width: 53vw;
 }
 
+.compose-form .header {
+    display: flex;
+    align-items: left;
+    align-items: center;
+    margin-left: 30px;
+    font-size: 1.2em;
+    /* background color ? */
+}
+.compose-form .to {
+    padding-left: 10px;
+    font-size: 1.2em;
+}
+.compose-form .subject {
+    padding-left: 10px;
+    font-size: 1.2em;
+}
+.compose-form .content {
+    padding-left: 10px;
+    font-size: 1.2em;
+}
+.compose-form .footer {
+    display: flex;
+    justify-content: space-between; /* Space between the buttons */
+    align-items: center;
+    padding: 20px;
+}
+.compose-form .footer .submit {
+    padding-left: 25px;
+    padding-right: 25px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    font-size: 1.4em;
+    border-radius: 20px;
+    background-color: rgb(60, 60, 237);
+    color: white;
+
+}
+.compose-form .footer .delete {
+    padding-left: 25px;
+    padding-right: 25px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    font-size: 1.4em;
+    border-radius: 20px;
+    background-color: rgba(60, 60, 237, 0.288);
+    color: white;
+}
+
+
+
+
+/* 
 .compose .to-cell {
     grid-row: 2;
+    width: 100%;
 
 }
 .compose .subject-cell {
@@ -40,6 +93,18 @@
 }
 .compose .submit-cell {
     grid-row: 5;
+} */
 
+
+/* option for grid - grid template area */
+/* put width = 100% on the inpt */
+
+/* .bigger-size {
+width: 80%
 }
+
+.normal { 
+
+} */
+
 
