@@ -8,6 +8,7 @@ export const emailService = {
     getById,
     getDefaultFilter,
     getFilterFromSearchParams,
+    getCurrentUser,
 }
 
 const STORAGE_KEY = 'emails'
@@ -17,6 +18,10 @@ const loggedinUser = {
     }
 
 _createEmails()
+
+function getCurrentUser() {
+    return loggedinUser
+}
 
 function getById(id) {
     return storageService.get(STORAGE_KEY, id)
@@ -101,6 +106,7 @@ async function query(filterBy, folder) {
     }
     
     // draft search
+    console.log('draft search');
     if (folder === 'draft') {
         emails = emails.filter(email => {
             return email.draft

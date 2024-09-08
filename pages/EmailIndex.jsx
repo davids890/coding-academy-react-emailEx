@@ -13,16 +13,15 @@ export function EmailIndex() {
     const [ emailList, setEmails ] = useState([])
     const [ searchParams, SetSearchParams ] = useSearchParams()
     const [ filterBy, setFilterBy ] = useState(emailService.getFilterFromSearchParams(searchParams))
-    const {id, folder} = useParams()
-    const isCompose = searchParams.get('compose') === 'new'
+    // const {id, folder, emailId} = useParams()
+    const {id, folder, emailId} = useParams()
+    const isCompose = searchParams.get('compose')
     const navigate = useNavigate();
     
 
 
     useEffect(() => {
-        console.log('before load');
         loadEmails()
-        console.log('after load');
         SetSearchParams(getExistingProperties(filterBy)) // SetSearchParams - put the filterBy values in the url
         // return ()=
     }, [filterBy, folder])
@@ -63,6 +62,7 @@ export function EmailIndex() {
 
     async function onMarkUnread(emailId) {
         const email = await emailService.getById(emailId)
+        console.log('email: ', email);
         const emailCopy = {...email, isRead: false}
         await emailService.save(emailCopy)
         await loadEmails()
@@ -75,21 +75,41 @@ export function EmailIndex() {
         await loadEmails()
     }
     
-    function onEmailCompose(a){
-        console.log('a...', a);
-        console.log('onEmailCompose...');
+    async function onEmailCompose(email){
+        const newEmail = {
+            'subject': email.Subject,
+            'body': email.Content,
+            'isRead': false,
+            'isStarred': false,
+            'sentAt': new Date(),
+            'removedAt': false,
+            'from': emailService.getCurrentUser().email,
+            'to': email.To,
+            'draft': false,
+        }
+        await emailService.save(newEmail)
+        navigate(`/email/${folder}/`);
     }
     
     function onExitCompose() {
-        console.log('folder: ', folder);
         navigate(`/email/${folder}/`);
     }
 
-    console.log(emailList);
+    async function onUpdateEmail(email) {
+        console.log('onUpdateEmail');
+        // if email has no id save new email as draft
+        if (! email.id) {
+            await emailService.save({...email, 'draft': true, 'from': emailService.getCurrentUser().email})
+        console.log('done');
+
+        // if email has id already just update the email content
+        }
+    }
+
 
     return <section className="email-index">
-        {isCompose && <EmailCompose onExitCompose={onExitCompose}/>}
-        <EmailFolderList onEmailCompose={onEmailCompose}/>
+        {isCompose && <EmailCompose onExitCompose={onExitCompose} onEmailCompose={onEmailCompose} onUpdateEmail={onUpdateEmail} />}
+        <EmailFolderList/>
         <EmailFilter filterBy={filterBy}  onFilterBy={onFilterBy}/>
         {!id && <EmailList emailList={emailList} onEmailDelete={onEmailDelete} 
             onMarkUnread={onMarkUnread} onStarMark={onStarMark} />}

@@ -1,4 +1,8 @@
 
+import { useRef } from "react";
+import { useEffect } from "react";
+
+
 export const utilService = {
     makeId,
     saveToStorage,
@@ -33,3 +37,54 @@ export function getExistingProperties(obj) {
     }
     return truthyObj
 }
+
+export function debounce(func, time) {
+    let timeoutId
+    return (...args) => {
+        clearTimeout(timeoutId)
+        timeoutId = setTimeout(() => {
+            func(...args)
+        }, time)
+    }
+}
+
+
+
+export function useSaveToDraft(mailToEdit, onSaveDraft, time=3000) {
+    const timeoutRef = useRef()
+    useEffect(() => {
+        if (timeoutRef.current) {
+            clearTimeout(timeoutRef.current)
+            timeoutRef.current = null
+        }
+
+        timeoutRef.current = setTimeout(() => onSaveDraft(mailToEdit), time)
+    }, [mailToEdit])
+
+    return () => clearTimeout(timeoutRef.current)
+}
+
+// export function useSaveToDraft(mailToEdit, onSaveDraft, time = 3000) {
+//     const timeoutRef = useRef();
+
+//     useEffect(() => {
+//         // Clear previous timeout if it exists
+//         if (timeoutRef.current) {
+//             clearTimeout(timeoutRef.current);
+//         }
+
+//         // Set a new timeout to save the draft
+//         timeoutRef.current = setTimeout(() => {
+//             onSaveDraft(mailToEdit);
+//         }, time);
+
+//         // Cleanup function to clear the timeout when the component unmounts or before the next effect runs
+//         return () => {
+//             if (timeoutRef.current) {
+//                 clearTimeout(timeoutRef.current);
+//             }
+//         };
+//     }, [mailToEdit, onSaveDraft, time]);
+
+//     return;
+// }

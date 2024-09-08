@@ -1,39 +1,54 @@
 .compose-form {
     display: grid;
-    
-    grid-template-rows: 0.45fr 0.45fr 0.45fr 6fr 0.45fr;
-    /* height: 80vh;
-    width: 83vw; */
-    
     position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    
-    margin: auto; 
     background-color: white;
-
     z-index: 10;
     border-radius: 20px;
 }
+/* Big view: Adjust the form size */
 .compose-form.big {
+    grid-template-rows: 0.45fr 0.45fr 0.45fr 6fr 0.45fr;
     height: 80vh;
     width: 83vw;
+    top: 50%;
+    left:50%;
+    transform: translate(-50%, -50%);
 }
 .compose-form.normal {
-    height: 50vh;
-    width: 53vw;
+    grid-template-rows: 0.45fr 0.45fr 0.45fr 6fr 0.45fr;
+    height: 60vh;
+    width: 43vw;
+    bottom: 0px;
+    right: 0px;
 }
-
+.compose-form.min {
+     height: 5vh;
+     width: 23vw;  /* Adjust this width or add a min-width */
+     min-width: 400px; /* Ensure the width is at least 300px */
+     bottom: 0px;
+     right: 0px;
+     margin-right: 30px;
+}
+.normal-button {
+    justify-self: right;
+}
 .compose-form .header {
     display: flex;
-    align-items: left;
-    align-items: center;
-    margin-left: 30px;
-    font-size: 1.2em;
-    /* background color ? */
+    justify-content: space-between; /* Space between the text and buttons */
+    align-items: center; /* Center items vertically */
 }
+.header .msg-text{
+    text-align: left;
+    margin-left: 5px;
+    margin-left: 25px;
+
+}
+.header .controls {
+    display: flex;
+    margin-right: 10px;
+    gap: 5px;
+}
+
 .compose-form .to {
     padding-left: 10px;
     font-size: 1.2em;
@@ -73,38 +88,3 @@
     background-color: rgba(60, 60, 237, 0.288);
     color: white;
 }
-
-
-
-
-/* 
-.compose .to-cell {
-    grid-row: 2;
-    width: 100%;
-
-}
-.compose .subject-cell {
-    grid-row: 3;
-
-}
-.compose .content-cell {
-    grid-row: 4;
-
-}
-.compose .submit-cell {
-    grid-row: 5;
-} */
-
-
-/* option for grid - grid template area */
-/* put width = 100% on the inpt */
-
-/* .bigger-size {
-width: 80%
-}
-
-.normal { 
-
-} */
-
-

@@ -1,13 +1,12 @@
+import { useState } from "react";
+import { iconsService } from "../src/services/icons.service.js"
 import { EmailPreview } from "./EmailPreview";
 import { useNavigate } from "react-router-dom";
-import { useState } from "react";
 import starImage from "../images/star-filled.svg";
-import { iconsService } from "../src/services/icons.service.js"
 import { useParams } from "react-router-dom";
 
 
 
-// export function EmailList({ emailList, onEmailDelete, onMarkUnread, status, onStarMark }) {
 export function EmailList({ emailList, onEmailDelete, onMarkUnread, onStarMark }) {
     const navigate = useNavigate(); // Hook for navigation
     const { folder } = useParams()
@@ -48,8 +47,11 @@ export function EmailList({ emailList, onEmailDelete, onMarkUnread, onStarMark }
                     // Check if the click was on the checkbox
                     if (e.target.type === "checkbox") return; // Prevent navigation when checkbox is clicked
 
-                    // Navigate to the email detail page
-                    navigate(`/email/${folder}/${email.id}`);
+                    if (folder === 'draft') {navigate(`/email/${folder}/?compose=edit&emailId=${email.id}`);}
+                    else {
+                        // Navigate to the email detail page
+                        navigate(`/email/${folder}/${email.id}`);
+                    }
                 };
 
                 return (
