@@ -31,6 +31,7 @@ function remove(id) {
     return storageService.remove(STORAGE_KEY, id)
 }
 function save(emailToSave) {
+    console.log('emailToSave.id: ', emailToSave.id);
     if (emailToSave.id) {
         // Update existing email (overwrite it)
         return storageService.put(STORAGE_KEY, emailToSave);
@@ -78,7 +79,8 @@ async function query(filterBy, folder) {
 
     //TODO: use switch case for the folder ifltering + you can split to filter by folder and filter by text functions
     // inbox search
-    if (folder === 'Inbox' && !filterBy.txt.length > 0) {
+    if (folder === 'inbox' && !filterBy.txt.length > 0) {
+        console.log('inbox');
         emails = emails.filter(email => {
             return email.to === 'user@appsus.com' && !email.removedAt;
         })
@@ -87,14 +89,14 @@ async function query(filterBy, folder) {
     // sent search
     if (folder === 'sent') {
         emails = emails.filter(email => {
-            return email.to !== 'user@appsus.com' && !email.removedAt;
+            return email.to !== 'user@appsus.com' && !email.removedAt && !email.draft;
         })
     }
     // star search
     if (folder === 'starred') {
         emails = emails.filter(email => {
 
-            return email.isStarred && !email.removedAt;
+            return email.isStarred && !email.removedAt && !email.draft;
         })
     }
     
