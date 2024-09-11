@@ -79,12 +79,17 @@ export function EmailIndex() {
 
   async function onEmailCompose(email) {
     console.log("on compose email: ", email);
+    const isId = searchParams.get("emailId");
+
     const newEmail = await emailService.save({
       ...email,
       draft: false,
       from: emailService.getCurrentUser().email,
       sentAt: new Date(),
+      id: isId,
     });
+
+    console.log("newEmail: ", newEmail);
 
     const emailIndex = emailList.findIndex((entity) => entity.id === email.id);
     if (emailIndex < 0) {
@@ -98,6 +103,7 @@ export function EmailIndex() {
         return updatedEmails;
       });
     }
+    await loadEmails();
     // third option - the email in the draft and now i want to remove the email from the draft dir (note thing on all the options (startred inbox etc.))
     navigate(`/email/${folder}/`);
   }
@@ -107,14 +113,20 @@ export function EmailIndex() {
   }
 
   async function onUpdateEmail(email) {
-    console.log("onUpdateEmail");
-    await emailService.save({
+    console.log("onUpdateEmail: ", email);
+    const isId = searchParams.get("emailId");
+    console.log("isId: ", isId);
+    console.log("emailId: ", emailId);
+
+    const draftedEmail = await emailService.save({
       ...email,
       draft: true,
       from: emailService.getCurrentUser().email,
+      id: isId,
     });
-    // update also the email list in the front
+    navigate(`/email/${folder}/?compose=edit&emailId=${draftedEmail.id}`);
 
+    // update also the email list in the front
     // option one - loadEmails, option two - don;t load all the email, update by specific scenario ()
     loadEmails();
     // setEmails((prev) => [...prev, email]);

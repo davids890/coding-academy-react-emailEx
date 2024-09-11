@@ -109,11 +109,14 @@ async function query(filterBy, folder) {
     
     // draft search
     console.log('draft search');
+    console.log('emails: ', emails);
     if (folder === 'draft') {
         emails = emails.filter(email => {
             return email.draft
         })
     }
+    console.log('emails aftre: ', emails);
+
     
     return emails
 }
