@@ -9,6 +9,7 @@ export const emailService = {
     getDefaultFilter,
     getFilterFromSearchParams,
     getCurrentUser,
+    countUnreadEmails,
 }
 
 const STORAGE_KEY = 'emails'
@@ -119,6 +120,11 @@ async function query(filterBy, folder) {
 
     
     return emails
+}
+
+function countUnreadEmails() {
+    let emails = utilService.loadFromStorage(STORAGE_KEY)
+    return emails.filter(email => !email.isRead).length
 }
 
 function getDefaultFilter() {

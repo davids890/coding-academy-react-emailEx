@@ -7,8 +7,13 @@ import { EmailFolderList } from "../cmps/EmailFolderList.jsx";
 import { useSearchParams } from "react-router-dom";
 import { getExistingProperties } from "../src/services/util.service.js";
 import { EmailCompose } from "../cmps/EmailCompose.jsx";
+import {
+  showErrorMsg,
+  showSuccessMsg,
+} from "../src/services/event-bus.service.js";
 
 export function EmailIndex() {
+  console.log("EmailIndex: ", EmailIndex);
   const [emailList, setEmails] = useState([]);
   const [searchParams, SetSearchParams] = useSearchParams();
   const [filterBy, setFilterBy] = useState(
@@ -18,19 +23,30 @@ export function EmailIndex() {
   const { id, folder, emailId } = useParams();
   const isCompose = searchParams.get("compose");
   const navigate = useNavigate();
+  const [unradCount, setUnreadCount] = useState(0);
 
   useEffect(() => {
+    console.log("init... load emails");
+    console.log("folder: ", folder);
     loadEmails();
     SetSearchParams(getExistingProperties(filterBy)); // SetSearchParams - put the filterBy values in the url
     // return ()=
   }, [filterBy, folder]);
+
+  useEffect(() => {
+    console.log("unradCount: ", unradCount);
+    console.log("emailList.length: ", emailList.length);
+    setUnreadCount(emailService.countUnreadEmails());
+    console.log("unradCount: ", unradCount);
+  }, [emailList]);
 
   async function loadEmails() {
     try {
       const emails = await emailService.query(filterBy, folder);
       setEmails(emails);
     } catch (error) {
-      console.log(error);
+      // console.log(error);
+      showErrorMsg("Failed to load emails");
     }
   }
 
@@ -55,26 +71,38 @@ export function EmailIndex() {
       try {
         if (folder === "trash") await emailService.remove(emailToRemove.id);
         else await emailService.save(emailToRemove);
+        showSuccessMsg("Email deleted successfully");
+        console.log("Email deleted successfully");
         await loadEmails(); // Re-fetch emails to ensure consistency with the server
       } catch (error) {
-        console.error("Failed to delete email:", error);
+        // console.error("Failed to delete email:", error);
+        showErrorMsg("Failed to delete email: {error}");
       }
     }
   }
 
   async function onMarkUnread(emailId) {
-    const email = await emailService.getById(emailId);
-    console.log("email: ", email);
-    const emailCopy = { ...email, isRead: false };
-    await emailService.save(emailCopy);
-    await loadEmails();
+    try {
+      const email = await emailService.getById(emailId);
+      const emailCopy = { ...email, isRead: false };
+      await emailService.save(emailCopy);
+      showSuccessMsg("Email marked as unread");
+      await loadEmails();
+    } catch (error) {
+      showErrorMsg(`Failed to mark email as unread: ${error.message}`);
+    }
   }
 
   async function onStarMark(emailId) {
-    const email = await emailService.getById(emailId);
-    const emailCopy = { ...email, isStarred: !email.isStarred };
-    await emailService.save(emailCopy);
-    await loadEmails();
+    try {
+      const email = await emailService.getById(emailId);
+      const emailCopy = { ...email, isStarred: !email.isStarred };
+      await emailService.save(emailCopy);
+      showSuccessMsg(emailCopy.isStarred ? "Email starred" : "Email unstarred");
+      await loadEmails();
+    } catch (error) {
+      showErrorMsg(`Failed to update star status: ${error.message}`);
+    }
   }
 
   async function onEmailCompose(email) {
@@ -141,7 +169,7 @@ export function EmailIndex() {
           onUpdateEmail={onUpdateEmail}
         />
       )}
-      <EmailFolderList />
+      <EmailFolderList unradCount={unradCount} />
       <EmailFilter filterBy={filterBy} onFilterBy={onFilterBy} />
       {!id && (
         <EmailList
